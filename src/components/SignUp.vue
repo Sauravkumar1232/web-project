@@ -22,28 +22,27 @@
         <div class="row">
           <div class="col"></div>
           <div class="col">
-            <form action="/user/create" method="post">
-              <!--either get or post-->
-              <div class="field my-3">
-                <label for="" class="form-label">FirstName:</label>
-                <input type="text" class="form-control" v-model="firstname" />
-              </div>
-              <div class="field my-3">
-                <label for="" class="form-label">Lastname:</label>
-                <input type="text" class="form-control" v-model="Lastname" />
-              </div>
-              <div class="field my-3">
-                <!-- <label for="" class="form-label">mobno:</label>
+            <!--either get or post-->
+            <div class="field my-3">
+              <label for="" class="form-label">FirstName:</label>
+              <input type="text" class="form-control" v-model="firstname" />
+            </div>
+            <div class="field my-3">
+              <label for="" class="form-label">Lastname:</label>
+              <input type="text" class="form-control" v-model="Lastname" />
+            </div>
+            <div class="field my-3">
+              <!-- <label for="" class="form-label">mobno:</label>
                 <input type="text" class="form-control" v-model="mobno" /> -->
-                <div class="field my-3">
-                  <label for="" class="form-label">email:</label>
-                  <input type="text" class="form-control" v-model="email" />
-                </div>
-                <div class="field my-3">
-                  <label for="" class="form-label">password:</label>
-                  <input type="text" class="form-control" v-model="password" />
-                </div>
-                <!-- <div class="field my-3">
+              <div class="field my-3">
+                <label for="" class="form-label">email:</label>
+                <input type="text" class="form-control" v-model="email" />
+              </div>
+              <div class="field my-3">
+                <label for="" class="form-label">password:</label>
+                <input type="text" class="form-control" v-model="password" />
+              </div>
+              <!-- <div class="field my-3">
                   <label for="" class="form-label">Usertype:</label>
                   <input
                     type="text"
@@ -52,14 +51,13 @@
                     placeholder="enter usertype(1-admin,2-normal)"
                   />
                 </div> -->
-              </div>
-              <input
-                type="submit"
-                value="signup"
-                class="btn btn-info my-3 w-100"
-                @click="adduser()"
-              />
-            </form>
+            </div>
+            <input
+              type="submit"
+              value="signup"
+              class="btn btn-info my-3 w-100"
+              @click="adduser()"
+            />
           </div>
           <div class="col"></div>
         </div>
@@ -91,11 +89,12 @@ export default {
           password: this.password,
           email: this.email,
         };
-        await axios({
+        let result = await axios({
           method: "post",
           url: "http://localhost:3000/user/create",
           data: data,
         });
+        console.log(result, "message");
       } catch (err) {
         console.log(err);
       }

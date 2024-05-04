@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import UserList from "./components/UserList";
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: "/bookCreate",
     name: "BookCreate",
     component: () => import("./components/BookCreate.vue"),
+  },
+  {
+    path: "/gotuserList",
+    name: "UserList",
+    component: UserList,
   },
 ];
 
