@@ -58,6 +58,13 @@
               class="btn btn-info my-3 w-100"
               @click="adduser()"
             />
+
+            <input
+              type="submit"
+              value="All Users"
+              class="btn btn-info my-3 w-100"
+              @click="allUsers()"
+            />
           </div>
           <div class="col"></div>
         </div>
@@ -68,6 +75,7 @@
 
 <script>
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "SignUp",
@@ -95,6 +103,10 @@ export default {
           data: data,
         });
         console.log(result, "message");
+        if (result.data.success) {
+          // router.push({ path: "./userList" });
+          router.push({ name: "UserList" });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -103,6 +115,13 @@ export default {
       //       url:'http://localhost:3000/user/create',
       //       data:data,
       //   }
+    },
+    async allUsers() {
+      let result = await axios({
+        method: "get",
+        url: "http://localhost:3000/user/list",
+      });
+      console.log(result, "Users");
     },
   },
 };
