@@ -110,17 +110,13 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      //   axios({
-      //       method:'post',
-      //       url:'http://localhost:3000/user/create',
-      //       data:data,
-      //   }
     },
     async allUsers() {
       let result = await axios({
         method: "get",
         url: "http://localhost:3000/user/list",
       });
+      router.push({ path: "UserList" });
       console.log(result, "Users");
     },
   },

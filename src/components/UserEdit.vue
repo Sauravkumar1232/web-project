@@ -87,13 +87,12 @@ export default {
   name: "UserEdit",
   data() {
     return {
-      user: {
-        // firstname: "",
-        // Lastname: "",
-        // //   mobno: "",
-        // email: "",
-        // password: "",
-      },
+      user: {},
+      // firstname: "",
+      // Lastname: "",
+      // //   mobno: "",
+      // email: "",
+      // password: "",
     };
   },
 
@@ -102,9 +101,17 @@ export default {
   },
   methods: {
     async editUser(id) {
+      let data = {
+        firstname: this.user.firstname,
+        Lastname: this.user.Lastname,
+        password: this.user.password,
+        email: this.user.email,
+      };
+
       let result = await axios({
         method: "put",
         url: "http://localhost:3000/user/edit/" + id,
+        data: data,
       });
       console.log(result);
     },
@@ -120,6 +127,10 @@ export default {
       });
       console.log(result, "fetched user for db");
       this.user = result.data.data;
+      // this.firstname = result.data.data.firstname;
+      // this.Lastname = result.data.data.Lastname;
+      // this.email = result.data.data.email;
+      // this.password = result.data.data.password;
     },
   },
 };

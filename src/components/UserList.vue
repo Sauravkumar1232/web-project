@@ -51,13 +51,6 @@ import axios from "axios";
 export default {
   name: "UserList",
 
-  props: {
-    userId: {
-      type: Number,
-      required: true,
-    },
-  },
-
   data() {
     return {
       userList: {},
