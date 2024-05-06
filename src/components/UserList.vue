@@ -25,8 +25,18 @@
             <td>{{ user.email }}</td>
             <td>{{ user.password }}</td>
             <td>
-              <input type="submit" value="Edit" />
-              <input type="submit" value="Delete" @click="deleteUser()" />
+              <input
+                class="edit"
+                type="submit"
+                value="Edit"
+                @click="openEditPage(user._id)"
+              />
+              <input
+                class="delete"
+                type="submit"
+                value="Delete"
+                @click="deleteUser(user._id)"
+              />
             </td>
           </tr>
         </tbody>
@@ -35,6 +45,7 @@
   </html>
 </template>
 <script>
+import router from "@/router";
 import axios from "axios";
 
 export default {
@@ -58,6 +69,12 @@ export default {
   },
 
   methods: {
+    async openEditPage(id) {
+      console.log(id);
+      router.push({ path: "/userEdit/" + id });
+
+      // alert(id);
+    },
     async getuserList() {
       try {
         // alert("ok..");
@@ -71,13 +88,15 @@ export default {
         console.log(err);
       }
     },
-    async deleteUser() {
+    async deleteUser(id) {
       try {
+        console.log(id);
         let result = await axios({
           method: "delete",
-          url: `http://localhost:3000/user/delete/${this.userId}`,
+          url: "http://localhost:3000/user/delete/" + id,
         });
         console.log(result, " Deleted");
+        this.getuserList();
       } catch (err) {
         console.log(err);
       }
@@ -120,5 +139,26 @@ td {
 }
 thead th {
   width: auto;
+}
+.delete {
+  padding: 5px;
+  width: auto;
+  border-radius: 3px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-size: medium;
+  cursor: pointer;
+}
+.edit {
+  color: white;
+  margin-right: 5px;
+  padding: 5px;
+  width: auto;
+  border-radius: 3px;
+  border-style: groove;
+  background-color: green;
+  font-size: medium;
+  cursor: pointer;
 }
 </style>
